@@ -1,0 +1,9 @@
+{
+  "name": "syslab-backend-management",
+  "version": "1.0.0",
+  "description": "Habilidad personalizada para gestionar endpoints REST y persistencia con Prisma para el Sistema de Gestión de Tareas.",
+  "rules": [
+    "Validar modelos de datos de User y Task",
+    "Asegurar conexiones a PostgreSQL mediante variables de entorno"
+  ]
+}
