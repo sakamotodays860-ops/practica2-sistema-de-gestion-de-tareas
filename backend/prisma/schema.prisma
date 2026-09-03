@@ -1,0 +1,31 @@
+// backend/prisma/schema.prisma
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Modelo de Usuario
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  nombre    String
+  tasks     Task[]
+  createdAt DateTime @default(now())
+}
+
+// Modelo de Tarea para tu Sistema de Gestión de Tareas
+model Task {
+  id          Int      @id @default(autoincrement())
+  titulo      String
+  descripcion String?
+  completada  Boolean  @default(false)
+  prioridad   String   @default("MEDIA") // ALTA, MEDIA, BAJA
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+}
