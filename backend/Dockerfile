@@ -1,5 +1,7 @@
 FROM node:18-alpine
 
+RUN apk add --no-cache libc6-compat openssl
+
 WORKDIR /app
 
 COPY package*.json ./
@@ -9,4 +11,4 @@ COPY . .
 
 EXPOSE 4000
 
-CMD ["npm", "run", "dev"]
+CMD ["sh", "-c", "npx prisma generate && node index.js"]
