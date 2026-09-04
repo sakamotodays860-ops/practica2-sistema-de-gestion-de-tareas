@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "echo 'Frontend dev server' && tail -f /dev/null",
-    "start": "echo 'Frontend start'"
+    "dev": "node index.js",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
   }
 }
