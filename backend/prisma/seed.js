@@ -1,15 +1,20 @@
-// backend/prisma/seed.js
 const { PrismaClient } = require('@prisma/client');
+const bcrypt = require('bcryptjs');
+
 const prisma = new PrismaClient();
 
 async function main() {
-  // Crear un usuario de prueba
+  const passwordHash = await bcrypt.hash('SysLab2026*', 10);
+
   const usuario = await prisma.user.upsert({
     where: { email: 'estudiante@ejemplo.com' },
-    update: {},
+    update: {
+      password: passwordHash,
+    },
     create: {
       email: 'estudiante@ejemplo.com',
       nombre: 'Estudiante SysLab',
+      password: passwordHash,
       tasks: {
         create: [
           {
@@ -29,7 +34,10 @@ async function main() {
     },
   });
 
-  console.log('✅ Base de datos poblada exitosamente con el usuario y tareas iniciales:', usuario);
+  console.log(
+    '✅ Base de datos poblada exitosamente:',
+    usuario.email
+  );
 }
 
 main()
