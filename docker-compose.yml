@@ -3,23 +3,23 @@ version: '3.8'
 services:
   db:
     image: postgres:15-alpine
-    container_name: syslab_postgres_db
+    container_name: proyecto_paralelos_postgres
     restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres123
       POSTGRES_DB: tareas_db
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
   backend:
     build: ./backend
-    container_name: syslab_backend
+    container_name: proyecto_paralelos_backend
     restart: always
     ports:
-      - "4000:4000"
+      - "4001:4000"
     environment:
       DATABASE_URL: "postgresql://postgres:postgres123@db:5432/tareas_db?schema=public"
     depends_on:
@@ -27,10 +27,10 @@ services:
 
   frontend:
     build: ./frontend
-    container_name: syslab_frontend
+    container_name: proyecto_paralelos_frontend
     restart: always
     ports:
-      - "3000:3000"
+      - "3001:3000"
     depends_on:
       - backend
 
